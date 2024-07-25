@@ -1,8 +1,8 @@
 """
 # * @Author: DuTim
 # * @Date: 2024-07-20 17:33:38
-# * @LastEditTime: 2024-07-20 17:35:17
-# * @Description:  vllm llm server: v0.5.0
+# * @LastEditTime: 2024-07-25 10:50:52
+# * @Description:  vllm mock llm server: vllm --version==v0.5.0
 """
 import asyncio
 import importlib
@@ -14,19 +14,21 @@ from typing import Optional, Set
 
 import fastapi
 import uvicorn
+import vllm
+import vllm.envs as envs
 from fastapi import Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response, StreamingResponse
 from prometheus_client import make_asgi_app
 from starlette.routing import Mount
-
-import vllm
-import vllm.envs as envs
 from vllm.engine.arg_utils import AsyncEngineArgs
 from vllm.engine.async_llm_engine import AsyncLLMEngine
 from vllm.entrypoints.openai.cli_args import make_arg_parser
-from vllm.entrypoints.openai.protocol import ChatCompletionRequest, ChatCompletionResponse, CompletionRequest, EmbeddingRequest, ErrorResponse
+from vllm.entrypoints.openai.protocol import (ChatCompletionRequest,
+                                              ChatCompletionResponse,
+                                              CompletionRequest,
+                                              EmbeddingRequest, ErrorResponse)
 from vllm.entrypoints.openai.serving_chat import OpenAIServingChat
 from vllm.entrypoints.openai.serving_completion import OpenAIServingCompletion
 from vllm.entrypoints.openai.serving_embedding import OpenAIServingEmbedding
